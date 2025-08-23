@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="{{ 'rtl' if lang == 'ar' else 'ltr' }}" data-theme="dark">
+<head>
+  <!-- Meta & SEO -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{{ data.meta.description[lang] }}" />
+  <meta name="keywords" content="{{ data.meta.keywords }}" />
+  <meta name="author" content="{{ data.meta.author }}" />
+  <meta name="theme-color" content="#000033" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph Tags (تحسين SEO) -->
+  <meta property="og:title" content="{{ data.meta.og.title[lang] }}" />
+  <meta property="og:description" content="{{ data.meta.og.description[lang] }}" />
+  <meta property="og:image" content="{{ data.meta.og.image }}" />
+  <meta property="og:url" content="https://yourdomain.com" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="{{ 'ar_AR' if lang == 'ar' else 'en_US' }}" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ data.meta.og.title[lang] }}" />
+  <meta name="twitter:description" content="{{ data.meta.og.description[lang] }}" />
+  <meta name="twitter:image" content="{{ data.meta.og.image }}" />
+  <meta name="twitter:site" content="@Amer221534" />
+
+  <title>{{ data.meta.title[lang] }}</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='assets/images/logo.png') }}" />
+
+  <!-- Preload Key Assets -->
+  <link rel="preload" as="image" href="{{ url_for('static', filename='assets/images/logo.png') }}" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+
+  <!-- Inline Critical CSS + Loading Screen -->
+  <style>
+    /* =============== شاشة التحميل =============== */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000033;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+      color: #00FFFF;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .loading-logo {
+      width: 100px;
+      height: 100px;
+      animation: spin 2s linear infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .loading-text {
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+    }
+
+    /* =============== الصفحة الرئيسية =============== */
+    body {
+      margin: 0;
+      font-family: 'Lato', sans-serif;
+      background: #000033;
+      color: #FFFFFF;
+      line-height: 1.7;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    body.loaded {
+      opacity: 1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    body { opacity: 0; animation: fadeIn 0.5s ease forwards; }
+  </style>
+</head>
+<body>
+  <!-- شاشة التحميل -->
+  <div class="loading-screen">
+    <img src="{{ url_for('static', filename='assets/images/logo.png') }}" alt="Logo" class="loading-logo" />
+    <div class="loading-text">LOADING...</div>
+  </div>
+
+  <!-- Skip to Content -->
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <!-- Header & Navigation -->
+  <header class="main-header" role="banner">
+    <div class="logo" aria-label="Amer Developer Logo">
+      <img src="{{ logo_url }}" alt="Amer Developer" id="logo-img" loading="eager" width="60" height="60" />
+    </div>
+    <nav class="main-nav" aria-label="Main Navigation">
+      <ul class="nav-list">
+        <li class="nav-item"><a href="#home" class="nav-link active" data-translate="home">{{ translations.home[lang] }}</a></li>
+        <li class="nav-item"><a href="#about" class="nav-link" data-translate="about">{{ translations.about[lang] }}</a></li>
+        <li class="nav-item"><a href="#services" class="nav-link" data-translate="services">{{ translations.services[lang] }}</a></li>
+        <li class="nav-item"><a href="#skills" class="nav-link" data-translate="skills">{{ translations.skills[lang] }}</a></li>
+        <li class="nav-item"><a href="#tools" class="nav-link" data-translate="tools">{{ translations.tools[lang] }}</a></li>
+        <li class="nav-item"><a href="#projects" class="nav-link" data-translate="projects">{{ translations.projects[lang] }}</a></li>
+        <li class="nav-item"><a href="#contact" class="nav-link" data-translate="contact">{{ translations.contact[lang] }}</a></li>
+      </ul>
+    </nav>
+    <!-- Order Service Button -->
+    <button id="order-service-btn" class="btn btn-order" style="display: none;">
+      <i class="fas fa-shopping-cart"></i> <span data-translate="Order Service">{{ translations['Order Service'][lang] }}</span>
+    </button>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="hero-content-wrapper">
+        <div class="hero-text">
+          <h1 class="hero-title" data-animation="slide-up">
+            <span class="highlight" data-translate="hello">{{ translations['Hello, I\'m'][lang] }}</span> <strong id="hero-name">{{ 'عامر' if lang == 'ar' else 'Amer' }}</strong>
+          </h1>
+          <h2 class="hero-subtitle" data-animation="slide-up" style="animation-delay: 0.2s;">
+            <span class="typing-text" id="typing-text"></span>
+          </h2>
+          <p class="hero-paragraph" data-animation="fade-in" style="animation-delay: 0.4s;" data-translate="Building digital solutions">
+            {{ translations['Building digital solutions'][lang] }}
+          </p>
+          <a href="#about" class="btn btn-primary" data-animation="slide-up" style="animation-delay: 0.6s;" data-translate="More About Me">
+            {{ translations['More About Me'][lang] }} <i class="fas fa-arrow-right"></i>
+          </a>
+          <!-- Social Icons Below Button -->
+          <div class="social-icons-home" data-animation="fade-in" style="animation-delay: 0.8s;">
+            <a href="https://github.com/amer-developer0" target="_blank" rel="noopener" aria-label="GitHub">
+              <i class="fab fa-github fa-lg"></i>
+            </a>
+            <a href="https://www.instagram.com/amer_aeveloper?igsh=Z3pkOThsbzcydjF5" target="_blank" rel="noopener" aria-label="Instagram">
+              <i class="fab fa-instagram fa-lg"></i>
+            </a>
+            <a href="https://wa.me/201032637977" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp fa-lg"></i>
+            </a>
+          </div>
+        </div>
+        <div class="hero-avatar" data-animation="zoom-in" style="animation-delay: 0.8s;">
+          <img src="{{ logo_url }}" alt="Amer Developer Portrait" class="avatar-img" loading="eager" width="320" height="320" />
+          <div class="glow-ring"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section" data-section="about">
+      <div class="container">
+        <h2 class="section-title" data-animation="slide-up" data-translate="About Me">{{ translations['About Me'][lang] }}</h2>
+        <div class="about-content" data-animation="fade-in">
+          <p id="about-text">{{ about_text[lang]['part1'] }}</p>
+          <p id="about-text-2">{{ about_text[lang]['part2'] }}</p>
+          <p id="about-text-3">{{ about_text[lang]['part3'] }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section services-section" data-section="services">
+      <div class="container">
+        <h2 class="section-title" data-animation="slide-up" data-translate="My Services">{{ translations['My Services'][lang] }}</h2>
+        <p class="section-description" style="text-align: center; color: var(--text-gray); margin-bottom: var(--space-xl);">
+          {{ translations['I offer professional development services tailored to your needs.'][lang] }}
+        </p>
+
+        <!-- Action Buttons (فوق الشبكة الآن) -->
+        <div id="services-actions" style="display: none; text-align: center; margin-bottom: var(--space-lg);">
+          <button id="cancel-selection" class="btn btn-secondary">
+            <i class="fas fa-times"></i> <span data-translate="Cancel Selection">{{ translations['Cancel Selection'][lang] }}</span>
+          </button>
+          <button id="confirm-order" class="btn btn-primary" style="margin-left: 1rem;">
+            <i class="fas fa-check"></i> <span data-translate="Confirm Order">{{ translations['Confirm Order'][lang] }}</span>
+          </button>
+        </div>
+
+        <div class="services-grid" id="services-grid">
+          <!-- سيتم ملؤها بالـ JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section skills-section" data-section="skills">
+      <div class="container">
+        <h2 class="section-title" data-animation="slide-up" data-translate="My Skills">{{ translations['My Skills'][lang] }}</h2>
+        <div class="skills-grid" id="skills-grid">
+          <!-- سيتم ملؤها بالـ JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools" class="section tools-section" data-section="tools">
+      <div class="container">
+        <h2 class="section-title" data-animation="slide-up" data-translate="My Tools">{{ translations['My Tools'][lang] }}</h2>
+        <div class="tools-grid" id="tools-grid">
+          <!-- سيتم ملؤها بالـ JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section" data-section="projects">
+      <div class="container">
+        <h2 class="section-title" data-animation="slide-up" data-translate="Latest Projects" id="projects-title">
+          {{ translations['Latest Projects'][lang] }}
+        </h2>
+        <div class="projects-grid" id="projects-grid">
+          <!-- سيتم ملؤها بالـ JS -->
+        </div>
+        <div class="projects-empty" id="projects-empty" style="display: none; text-align: center; color: #CCCCCC;">
+          <p data-translate="No projects added yet.">{{ translations['No projects added yet.'][lang] }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section" data-section="contact">
+      <div class="container">
+        <h2 class="section-title" data-animation="slide-up" data-translate="Contact Me">{{ translations['Contact Me'][lang] }}</h2>
+        <div class="contact-form-wrapper">
+          <form id="contact-form" class="contact-form" action="https://formspree.io/f/xdkdjqzo" method="POST" novalidate>
+            <div class="form-group">
+              <label for="name">{{ translations['Your Name'][lang] }}</label>
+              <input type="text" id="name" name="name" required autocomplete="name" />
+              <div class="error-message" id="name-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="email">{{ translations['Your Email'][lang] }}</label>
+              <input type="email" id="email" name="email" required autocomplete="email" />
+              <div class="error-message" id="email-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="message">{{ translations['Your Message'][lang] }}</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+              <div class="error-message" id="message-error"></div>
+            </div>
+            <!-- Dual Send Buttons -->
+            <div class="send-options">
+              <button type="button" class="btn btn-email" id="send-email">
+                <i class="fas fa-envelope"></i> {{ translations['Send via Email'][lang] }}
+              </button>
+              <button type="button" class="btn btn-whatsapp" id="send-whatsapp">
+                <i class="fab fa-whatsapp"></i> {{ translations['Send via WhatsApp'][lang] }}
+              </button>
+            </div>
+          </form>
+          <div class="motivational-message">
+            <blockquote>
+              "{{ translations['I am available for collaboration'][lang] }}"
+            </blockquote>
+          </div>
+          <!-- All Social Links in Contact Section -->
+          <div class="social-links-contact">
+            <a href="https://github.com/amer-developer0" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://www.facebook.com/share/1LCZR74qAY/" target="_blank" rel="noopener">
+              <i class="fab fa-facebook"></i> Facebook
+            </a>
+            <a href="https://tiktok.com/@amer.developer8" target="_blank" rel="noopener">
+              <i class="fab fa-tiktok"></i> TikTok
+            </a>
+            <a href="https://www.instagram.com/amer_aeveloper?igsh=Z3pkOThsbzcydjF5" target="_blank" rel="noopener">
+              <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://x.com/Amer221534?t=Ekl-Dupdl0nP77nAcSOjLQ&s=09" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i> X (Twitter)
+            </a>
+            <a href="https://wa.me/201032637977" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>&copy; <span id="year">2025</span> Amer Developer. All rights reserved.</p>
+        <p>Email: <a href="mailto:iamamer030@gmail.com">iamamer030@gmail.com</a></p>
+        <p>Phone (WhatsApp only): <a href="https://wa.me/201032637977">+20 010 3263 7977</a></p>
+
+        <!-- Sitemap -->
+        <div class="sitemap">
+          <strong>{{ translations['Sitemap'][lang] }}:</strong>
+          <a href="#home">{{ translations['home'][lang] }}</a> |
+          <a href="#about">{{ translations['about'][lang] }}</a> |
+          <a href="#projects">{{ translations['projects'][lang] }}</a> |
+          <a href="#contact">{{ translations['contact'][lang] }}</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Language Switcher -->
+  <div class="language-switcher" id="language-switcher" role="button" aria-label="Change Language">
+    <i class="fas fa-globe"></i>
+    <ul class="language-menu" id="language-menu" hidden>
+      <li data-lang="ar">{{ 'العربية' if lang == 'en' else '✅ العربية' }}</li>
+      <li data-lang="en" class="{{ 'active' if lang == 'en' else '' }}">{{ 'English' if lang == 'ar' else '✅ English' }}</li>
+    </ul>
+  </div>
+
+  <!-- Custom Password Modal -->
+  <div class="modal" id="password-modal" hidden>
+    <div class="modal-content">
+      <h4 data-translate="Enter Admin Password">{{ translations['Enter Admin Password'][lang] }}</h4>
+      <p>{{ translations['This area is protected. Enter the password to continue.'][lang] }}</p>
+      <input type="password" id="admin-password" placeholder="{{ translations['Enter password'][lang] }}" />
+      <div class="error-message" id="password-error" style="color: #FF5555; margin: 10px 0; display: none;"></div>
+      <div class="modal-buttons">
+        <button class="btn" onclick="checkPassword()" data-translate="Enter">{{ translations['Enter'][lang] }}</button>
+        <button class="btn btn-secondary" onclick="closePasswordModal()" data-translate="Cancel">{{ translations['Cancel'][lang] }}</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Panel -->
+  <div class="admin-panel" id="admin-panel" hidden>
+    <div class="admin-header">
+      <h3 data-translate="Admin Panel">{{ translations['Admin Panel'][lang] }}</h3>
+      <button class="btn-close" onclick="toggleAdminPanel()">&times;</button>
+    </div>
+    <div class="admin-controls-grid">
+      <button class="admin-btn" onclick="openAddProject()"><i class="fas fa-plus"></i> {{ translations['Add Project'][lang] }}</button>
+      <button class="admin-btn" onclick="openAddSkill()"><i class="fas fa-plus"></i> {{ translations['Add Skill'][lang] }}</button>
+      <button class="admin-btn" onclick="openAddTool()"><i class="fas fa-plus"></i> {{ translations['Add Tool'][lang] }}</button>
+      <button class="admin-btn" onclick="openDeleteProject()"><i class="fas fa-trash"></i> {{ translations['Delete Project'][lang] }}</button>
+      <button class="admin-btn" onclick="openDeleteSkill()"><i class="fas fa-trash"></i> {{ translations['Delete Skill'][lang] }}</button>
+      <button class="admin-btn" onclick="openDeleteTool()"><i class="fas fa-trash"></i> {{ translations['Delete Tool'][lang] }}</button>
+      <button class="admin-btn" onclick="changeLogo()"><i class="fas fa-image"></i> {{ translations['Change Logo'][lang] }}</button>
+      <button class="admin-btn" onclick="changeAboutText()"><i class="fas fa-edit"></i> {{ translations['Change About Text'][lang] }}</button>
+      <button class="admin-btn full" onclick="enterEditMode()"><i class="fas fa-cogs"></i> {{ translations['Control Site Live'][lang] }}</button>
+    </div>
+
+    <!-- Edit Mode Overlay -->
+    <div id="edit-mode-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 10000; color: white; padding: 20px; overflow: auto;">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <h3>Live Edit Mode</h3>
+        <button class="btn" onclick="exitEditMode()">Exit Edit Mode</button>
+      </div>
+      <iframe id="site-frame" src="./" style="width: 100%; height: calc(100vh - 100px); border: 2px solid #00FFFF; border-radius: 10px;" sandbox="allow-scripts"></iframe>
+    </div>
+
+    <!-- Admin Forms -->
+    <div id="admin-forms">
+      <!-- Add Project Form -->
+      <div id="form-add-project" style="display: none;">
+        <form id="form-project">
+          <input type="text" placeholder="{{ translations['Project Name'][lang] }}" id="input-project-name" required />
+          <input type="url" placeholder="{{ translations['Project URL'][lang] }}" id="input-project-link" required />
+          <div class="file-input">
+            <label for="input-project-image">{{ translations['Upload Image'][lang] }}</label>
+            <input type="file" id="input-project-image" accept="image/*" required />
+            <span id="image-filename">{{ translations['No file chosen'][lang] }}</span>
+          </div>
+          <div class="file-input">
+            <label for="input-project-video">{{ translations['Upload Video (optional)'][lang] }}</label>
+            <input type="file" id="input-project-video" accept="video/*" />
+            <span id="video-filename">{{ translations['No file chosen'][lang] }}</span>
+          </div>
+          <textarea placeholder="{{ translations['Short Description'][lang] }}" id="input-project-desc" required></textarea>
+          <button type="submit" class="btn">{{ translations['Save Project'][lang] }}</button>
+          <button type="button" class="btn btn-secondary" onclick="closeAllForms()">{{ translations['Cancel'][lang] }}</button>
+        </form>
+      </div>
+
+      <!-- Add Skill Form -->
+      <div id="form-add-skill" style="display: none;">
+        <form id="form-skill">
+          <input type="text" placeholder="{{ translations['Skill Abbreviation'][lang] }}" id="input-skill-short" required />
+          <input type="text" placeholder="{{ translations['Full Name'][lang] }}" id="input-skill-full" required />
+          <textarea placeholder="{{ translations['Short Description'][lang] }}" id="input-skill-desc-en" required></textarea>
+          <textarea placeholder="{{ translations['Short Description'][lang] }} ({{ 'Arabic' }})" id="input-skill-desc-ar" required></textarea>
+          <button type="submit" class="btn">{{ translations['Add Skill'][lang] }}</button>
+          <button type="button" class="btn btn-secondary" onclick="closeAllForms()">{{ translations['Cancel'][lang] }}</button>
+        </form>
+      </div>
+
+      <!-- Add Tool Form -->
+      <div id="form-add-tool" style="display: none;">
+        <form id="form-tool">
+          <input type="text" placeholder="{{ translations['Tool Abbreviation'][lang] }}" id="input-tool-short" required />
+          <input type="text" placeholder="{{ translations['Full Name'][lang] }}" id="input-tool-full" required />
+          <textarea placeholder="{{ translations['Short Description'][lang] }}" id="input-tool-desc-en" required></textarea>
+          <textarea placeholder="{{ translations['Short Description'][lang] }} ({{ 'Arabic' }})" id="input-tool-desc-ar" required></textarea>
+          <button type="submit" class="btn">{{ translations['Add Tool'][lang] }}</button>
+          <button type="button" class="btn btn-secondary" onclick="closeAllForms()">{{ translations['Cancel'][lang] }}</button>
+        </form>
+      </div>
+
+      <!-- Delete Lists -->
+      <div id="delete-sections" style="display: none;">
+        <div class="delete-list" id="delete-project-list">
+          <p>{{ translations['No projects to delete'][lang] }}</p>
+        </div>
+        <div class="delete-list" id="delete-skill-list">
+          <p>{{ translations['No skills to delete'][lang] }}</p>
+        </div>
+        <div class="delete-list" id="delete-tool-list">
+          <p>{{ translations['No tools to delete'][lang] }}</p>
+        </div>
+        <button class="btn btn-secondary" onclick="closeAllForms()">{{ translations['Back'][lang] }}</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TikTok Notice Modal -->
+  <div class="modal" id="tiktok-modal" hidden>
+    <div class="modal-content">
+      <h4>{{ translations['TikTok Service Notice'][lang] }}</h4>
+      <p>
+        Dear Users,<br><br>
+        We regret to inform you that we have discontinued operating TikTok in Hong Kong.<br><br>
+        Thank you for the time you have spent with us on the platform and for giving us the opportunity to bring a little bit of joy into your life.<br><br>
+        The TikTok Team
+      </p>
+      <button class="btn" onclick="closeTikTokModal()">{{ translations['Got It'][lang] }}</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">Action completed successfully!</div>
+
+  <!-- External JS -->
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</body>
+</html>

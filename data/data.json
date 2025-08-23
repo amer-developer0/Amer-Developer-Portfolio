@@ -1,0 +1,135 @@
+{
+  "meta": {
+    "title": {
+      "en": "Amer Developer | Building Digital Futures with Code & Creativity",
+      "ar": "عامر المطور | بناء مستقبل رقمي بالكود والإبداع"
+    },
+    "description": {
+      "en": "Amer Developer | Full-Stack Web Developer & AI-Powered Solution Builder",
+      "ar": "عامر المطور | مطوّر ويب متعدد التخصصات وبناء حلول مدعومة بالذكاء الاصطناعي"
+    },
+    "keywords": "web developer, portfolio, HTML, CSS, JavaScript, Python, AI tools, Tailwind, Egypt",
+    "author": "Amer Abdo",
+    "og": {
+      "title": {
+        "en": "Amer Developer - Full-Stack Web & AI Developer",
+        "ar": "عامر المطور - مطوّر ويب وذكاء اصطناعي"
+      },
+      "description": {
+        "en": "Explore my portfolio: modern websites, AI tools, and digital solutions built with passion and precision.",
+        "ar": "استعرض محفظتي: مواقع حديثة، أدوات ذكاء اصطناعي، وحلول رقمية مبنية بالشغف والدقة."
+      },
+      "image": "/static/assets/images/logo.png"
+    },
+    "logo_url": "/static/assets/images/logo.png",
+    "about": {
+      "en": {
+        "part1": "Hello, I'm Amer from Egypt 🇪🇬, a web developer and programmer passionate about turning ideas into practical and effective digital solutions. I started my journey in programming through self-learning, and with every project I complete, I gain deeper experience and broader vision.",
+        "part2": "I specialize in designing and coding modern, responsive, and user-friendly websites, with a strong focus on user experience and fine details. I master HTML, CSS, and JavaScript to create professional interfaces, along with Python for building smart tools and applications.",
+        "part3": "I always strive to improve my skills and add new technologies to my toolkit, aiming to deliver the highest possible value to every client. I believe that the success of any project starts with a clear understanding of the goal and vision, then transforming them into a digital product that achieves the desired outcome efficiently and professionally."
+      },
+      "ar": {
+        "part1": "مرحبًا، أنا عامر من مصر 🇪🇬، مطوّر ويب ومبرمج مهتم بتحويل الأفكار إلى حلول رقمية عملية وفعّالة. بدأت رحلتي في عالم البرمجة بالتعلّم الذاتي، ومع كل مشروع أنجزه أكتسب خبرة أعمق ورؤية أوسع.",
+        "part2": "أعمل على تصميم وبرمجة مواقع عصرية متجاوبة وسهلة الاستخدام، مع التركيز على تجربة المستخدم وأدق التفاصيل. أتقن استخدام HTML، CSS، وJavaScript لتطوير واجهات احترافية، بالإضافة إلى Python لبناء أدوات وتطبيقات ذكية.",
+        "part3": "أسعى دائمًا لتطوير مهاراتي وإضافة تقنيات جديدة إلى صندوق أدواتي، بهدف تقديم أفضل قيمة ممكنة لكل عميل. وأؤمن أن نجاح أي مشروع يبدأ من فهم الهدف والرؤية بوضوح، ثم تحويلهما إلى منتج رقمي يحقق المطلوب بكفاءة واحترافية."
+      }
+    }
+  },
+  "skills": [
+    {
+      "short": "HTML",
+      "full": "HyperText Markup Language",
+      "desc_en": "Structure of web pages and content organization.",
+      "desc_ar": "هيكل صفحات الويب وصياغة المحتوى بطريقة منظمة."
+    },
+    {
+      "short": "CSS",
+      "full": "Cascading Style Sheets",
+      "desc_en": "Styling and adding aesthetic touches to design consistency.",
+      "desc_ar": "تنسيق الصفحات وإضافة لمسات جمالية وتناسق في التصميم."
+    },
+    {
+      "short": "JavaScript",
+      "full": "JavaScript",
+      "desc_en": "Adding interactivity and motion to make the site dynamic.",
+      "desc_ar": "إضافة التفاعلية والحركة لجعل الموقع ديناميكي."
+    },
+    {
+      "short": "Python",
+      "full": "Python",
+      "desc_en": "Programming applications and building smart tools and practical solutions.",
+      "desc_ar": "برمجة التطبيقات وبناء أدوات ذكية وحلول عملية."
+    },
+    {
+      "short": "Tailwind CSS",
+      "full": "Tailwind CSS",
+      "desc_en": "Designing professional interfaces quickly and flexibly with clean code.",
+      "desc_ar": "تصميم واجهات احترافية بسرعة ومرونة باستخدام كود نظيف."
+    },
+    {
+      "short": "AI Tools",
+      "full": "Artificial Intelligence Tools",
+      "desc_en": "Leveraging AI technologies to enhance performance and creativity.",
+      "desc_ar": "استغلال تقنيات الذكاء الاصطناعي لتحسين الأداء والإبداع."
+    }
+  ],
+  "tools": [
+    {
+      "short": "Git",
+      "full": "Git",
+      "desc_en": "Managing and tracking changes in programming projects.",
+      "desc_ar": "إدارة وتتبع التغييرات في المشاريع البرمجية."
+    },
+    {
+      "short": "GitHub",
+      "full": "GitHub",
+      "desc_en": "Saving and sharing code with easy collaboration.",
+      "desc_ar": "حفظ ومشاركة الأكواد والعمل الجماعي بسهولة."
+    },
+    {
+      "short": "VS Code",
+      "full": "Visual Studio Code",
+      "desc_en": "Powerful and flexible code editor supporting all technologies.",
+      "desc_ar": "محرر أكواد قوي ومرن يدعم جميع التقنيات."
+    },
+    {
+      "short": "Figma",
+      "full": "Figma",
+      "desc_en": "Designing user interfaces and experiences professionally.",
+      "desc_ar": "تصميم واجهات وتجربة مستخدم بشكل احترافي."
+    },
+    {
+      "short": "AI Tools",
+      "full": "Artificial Intelligence Tools",
+      "desc_en": "Using AI tools to improve work and save time.",
+      "desc_ar": "استخدام أدوات الذكاء الاصطناعي في تحسين العمل وتوفير الوقت."
+    }
+  ],
+  "projects": [],
+  "services": [
+    {
+      "name": "Landing Pages",
+      "desc": "Landing Pages Desc",
+      "message": "أرغب في طلب خدمة تصميم صفحة هبوط.",
+      "message_en": "I want to order a Landing Page service."
+    },
+    {
+      "name": "Websites",
+      "desc": "Websites Desc",
+      "message": "أرغب في طلب خدمة تطوير موقع ويب.",
+      "message_en": "I want to order a Website development service."
+    },
+    {
+      "name": "Python Scripts",
+      "desc": "Python Scripts Desc",
+      "message": "أرغب في طلب خدمة سكربت بايثون.",
+      "message_en": "I want to order a Python script service."
+    },
+    {
+      "name": "Support & Maintenance",
+      "desc": "Support & Maintenance Desc",
+      "message": "أرغب في طلب خدمة الدعم والصيانة.",
+      "message_en": "I want to order a Support & Maintenance service."
+    }
+  ]
+}
